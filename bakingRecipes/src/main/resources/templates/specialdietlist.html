@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Special Diet List</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Special Diets</h1>
+	<table>
+		<tr>
+			<th>Name</th>
+		</tr>
+
+		<tr th:each="specialDiet : ${specialDiets}">
+			<td th:text="${specialDiet.name}"></td>
+		</tr>
+	</table>
+	<a href="/recipelist">Recipes</a>
+</body>
+</html>
