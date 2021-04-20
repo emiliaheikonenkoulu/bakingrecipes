@@ -21,6 +21,7 @@ import fi.swd20.bakingRecipes.domain.Recipe;
 import fi.swd20.bakingRecipes.domain.RecipeRepository;
 import fi.swd20.bakingRecipes.domain.SpecialDietRepository;
 
+//poistaa CORPS virheilmoituksen
 @CrossOrigin
 @Controller
 public class RecipeController {
