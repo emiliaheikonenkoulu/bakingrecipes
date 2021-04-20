@@ -56,5 +56,5 @@ public class RecipeRepositoryTest {
 	public void searchRecipe() {
 		List<Recipe> recipes = reciperepository.findByName("Lettutaikina");
 		assertThat(recipes).isNotNull();
-	}	
+	}
 }

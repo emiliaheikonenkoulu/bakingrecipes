@@ -54,12 +54,13 @@ public class BakingRecipesApplication {
 					"Vaativampi", "Voi, maito, hiiva, muna, vehnäjauho, marsipaani, hillo ja kerma.",
 					categoryRepository.findByName("Pullat").get(0),
 					specialDietRepository.findByName("Liivatteeton").get(0)));
-			recipeRepository.save(new Recipe("Vaahtokarkkimuffinsit", "Resepti vie nuotiolla grillattujen vaahtokarkkien makuun.",
-					"Keskitaso", "Kerma, vaahtokarkki, leivinjauhe, jauho, kaakao, muna ja suklaa.",
-					categoryRepository.findByName("Makeat leivonnaiset").get(0),
-					specialDietRepository.findByName("Pähkinätön").get(0)));
-			recipeRepository.save(new Recipe("Omenapiirakka", "Klassinen, mutta herkullinen resepti.",
-					"Helppo", "Omena, voi, sokeri, jauho, muna, vesi ja sitruunan raaste.",
+			recipeRepository.save(
+					new Recipe("Vaahtokarkkimuffinsit", "Resepti vie nuotiolla grillattujen vaahtokarkkien makuun.",
+							"Keskitaso", "Kerma, vaahtokarkki, leivinjauhe, jauho, kaakao, muna ja suklaa.",
+							categoryRepository.findByName("Makeat leivonnaiset").get(0),
+							specialDietRepository.findByName("Pähkinätön").get(0)));
+			recipeRepository.save(new Recipe("Omenapiirakka", "Klassinen, mutta herkullinen resepti.", "Helppo",
+					"Omena, voi, sokeri, jauho, muna, vesi ja sitruunan raaste.",
 					categoryRepository.findByName("Makeat leivonnaiset").get(0),
 					specialDietRepository.findByName("Maidoton").get(0)));
 
