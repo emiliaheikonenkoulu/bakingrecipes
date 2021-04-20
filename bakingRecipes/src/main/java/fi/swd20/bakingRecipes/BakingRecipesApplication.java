@@ -38,6 +38,7 @@ public class BakingRecipesApplication {
 			categoryRepository.save(new Category("Kakut"));
 			categoryRepository.save(new Category("Pullat"));
 			
+			// reseptit
 			log.info("save recipes");
 			recipeRepository.save(new Recipe("Lettutaikina", "Lettu, lätty, ohukainen, räiskäle, kreppi.", "Helppo",
 			"Kananmunia, maito, vehnäjauho, sokeri ja suola.", categoryRepository.findByName("Makeat leivonnaiset").get(0), specialDietRepository.findByName("Gluteeniton").get(0)));
@@ -48,8 +49,8 @@ public class BakingRecipesApplication {
 			"Voi, maito, hiiva, muna, vehnäjauho, marsipaani, hillo ja kerma.", categoryRepository.findByName("Pullat").get(0), specialDietRepository.findByName("Liivatteeton").get(0)));
 			
 			// käyttäjät
-			User user1 = new User("user", "$2a$10$2DxQgGDhrCNFvzp8N.RbhuMj7QdnrOSg8sd2v.KUpT1fwDuHPoDsW", "user@user1.com", "USER");
-			User user2 = new User("admin", "$2a$10$XvadCvITo0MLCu54zoxfyOiZVSAutMXcKpUo5qs4FM2oJj83VYeE.", "admin@user2.com", "ADMIN");
+			User user1 = new User("user", "$2a$10$2DxQgGDhrCNFvzp8N.RbhuMj7QdnrOSg8sd2v.KUpT1fwDuHPoDsW", "USER");
+			User user2 = new User("admin", "$2a$10$XvadCvITo0MLCu54zoxfyOiZVSAutMXcKpUo5qs4FM2oJj83VYeE.", "ADMIN");
 			userRepository.save(user1);
 			userRepository.save(user2);
 			

@@ -16,12 +16,11 @@
 	<select id="categorylist" th:field="*{category}" class="form-control">
 		<option th:each="category: ${categories}" th:value="${category.categoryId}" th:text="${category.name}"></option>
 	</select>
-	<p></p>
 	<label for="specialDietlist">Special Diet:</label>
 	<select id="specialDietlist" th:field="*{specialDiet}" class="form-control">
 	<option th:each="specialDiet: ${specialDiets}" th:value="${specialDiet.specialDietId}" th:text="${specialDiet.name}"></option>
 	</select>
-	<p></p>
+	<p>
 	<input type="submit" value="Submit" /> <input type="reset" value="Reset" />
 	</form>
     

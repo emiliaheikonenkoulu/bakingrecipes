@@ -1,6 +1,10 @@
 package fi.swd20.bakingRecipes.domain;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class User {
@@ -15,9 +19,6 @@ public class User {
 
     @Column(name = "passwordHash", nullable = false)
     private String passwordHash;
-    
-    @Column(name = "email", nullable = false)
-    private String email;
 
     @Column(name = "role", nullable = false)
     private String role;
@@ -25,11 +26,10 @@ public class User {
     public User() {
     }
 
-	public User(String username, String passwordHash, String email, String role) {
+	public User(String username, String passwordHash, String role) {
 		super();
 		this.username = username;
 		this.passwordHash = passwordHash;
-		this.email = email;
 		this.role = role;
 	}
 
@@ -56,14 +56,7 @@ public class User {
 	public void setPassword(String passwordHash) {
 		this.passwordHash = passwordHash;
 	}
-	
-	public String getEmail() {
-		return email;
-	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
 	public String getRole() {
 		return role;
