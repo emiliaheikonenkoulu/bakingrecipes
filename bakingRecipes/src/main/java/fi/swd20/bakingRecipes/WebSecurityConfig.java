@@ -22,14 +22,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
         .authorizeRequests()
-        .antMatchers("/login", "/h2-console/**", "/recipelist", "/api/**").permitAll()
+        .antMatchers("/login", "/h2-console/**", "/recipelist", "/recipes").permitAll()
         .anyRequest().authenticated()
         .and()
         .csrf().ignoringAntMatchers("/h2-console/**")
         .and()
         .csrf().ignoringAntMatchers("/recipelist")
         .and()
-        .csrf().ignoringAntMatchers("/api/**")
+        .csrf().ignoringAntMatchers("/recipes")
         .and()
         .headers().frameOptions().sameOrigin()
         .and()
