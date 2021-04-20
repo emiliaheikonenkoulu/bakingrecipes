@@ -15,11 +15,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class SpecialDiet {
 	// attribuutit
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long specialDietId;
-	
+
 	private String name;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "specialDiet")
 	@JsonIgnoreProperties("specialDiet")
 	private List<Recipe> recipes;
@@ -29,7 +29,7 @@ public class SpecialDiet {
 		super();
 		this.name = name;
 	}
-	
+
 	public SpecialDiet() {
 		super();
 		this.name = null;

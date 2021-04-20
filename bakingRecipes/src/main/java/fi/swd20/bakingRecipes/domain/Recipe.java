@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -14,27 +15,29 @@ public class Recipe {
 
 	// attribuutit
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
+	@Size(min = 5, max = 40)
 	private String name;
+
 	private String description;
 	private String difficultyLevel;
 	private String ingredient;
-	
+
 	@ManyToOne
-	@JsonIgnoreProperties ("recipes")
+	@JsonIgnoreProperties("recipes")
 	@JoinColumn(name = "categoryId")
 	private Category category;
-	
+
 	@ManyToOne
-	@JsonIgnoreProperties ("recipes")
+	@JsonIgnoreProperties("recipes")
 	@JoinColumn(name = "specialDietId")
 	private SpecialDiet specialDiet;
-	
+
 	// konstruktorit
-	public Recipe(String name, String description, String difficultyLevel,
-			String ingredient, Category category, SpecialDiet specialDiet) {
+	public Recipe(String name, String description, String difficultyLevel, String ingredient, Category category,
+			SpecialDiet specialDiet) {
 		super();
 		this.name = name;
 		this.description = description;
@@ -43,7 +46,7 @@ public class Recipe {
 		this.category = category;
 		this.specialDiet = specialDiet;
 	}
-	
+
 	public Recipe() {
 		super();
 		this.id = 0L;
@@ -52,7 +55,7 @@ public class Recipe {
 		this.difficultyLevel = null;
 		this.ingredient = null;
 	}
-	
+
 	public Recipe(String name, String description, String difficultyLevel, String ingredient) {
 		super();
 		this.name = name;
@@ -60,7 +63,7 @@ public class Recipe {
 		this.difficultyLevel = difficultyLevel;
 		this.ingredient = ingredient;
 	}
-	
+
 	// getterit ja setterit
 	public Long getId() {
 		return id;
@@ -101,15 +104,15 @@ public class Recipe {
 	public void setIngredient(String ingredient) {
 		this.ingredient = ingredient;
 	}
-	
+
 	public Category getCategory() {
 		return category;
 	}
-	
+
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-	
+
 	public SpecialDiet getSpecialDiet() {
 		return specialDiet;
 	}
@@ -122,9 +125,11 @@ public class Recipe {
 	@Override
 	public String toString() {
 		if (this.category != null && this.specialDiet != null)
-			return "Recipe [id=" + id + ", name=" + name + ", description=" + description + ", difficultyLevel=" + difficultyLevel +
-					", ingredient=" + ingredient + " category =" + this.getCategory() + " specialDiet =" + this.getSpecialDiet() + "]";		
+			return "Recipe [id=" + id + ", name=" + name + ", description=" + description + ", difficultyLevel="
+					+ difficultyLevel + ", ingredient=" + ingredient + " category =" + this.getCategory()
+					+ " specialDiet =" + this.getSpecialDiet() + "]";
 		else
-			return "Recipe [id=" + id + ", name=" + name + ", description=" + description + ", difficultyLevel=" + difficultyLevel + ", ingredient=" + ingredient + "]";
+			return "Recipe [id=" + id + ", name=" + name + ", description=" + description + ", difficultyLevel="
+					+ difficultyLevel + ", ingredient=" + ingredient + "]";
 	}
 }

@@ -1,28 +1,51 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Recipe form</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Recipe form</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 	<h1>Recipe</h1>
-	<form action="#" th:action="@{/save}"  th:object= ${recipe} method="post">
-	<p>Name: <input type="text" th:field="${recipe.name}" /></p>
-	<p>Description: <input type="text" th:field="${recipe.description}" /></p>
-	<p>Difficulty Level: <input type="text" th:field="${recipe.difficultyLevel}" /></p>
-	<p>Ingredients: <input type="text" th:field="${recipe.ingredient}" /></p>
-	
-	<label for="categorylist">Category:</label>
-	<select id="categorylist" th:field="*{category}" class="form-control">
-		<option th:each="category: ${categories}" th:value="${category.categoryId}" th:text="${category.name}"></option>
-	</select>
-	<label for="specialDietlist">Special Diet:</label>
-	<select id="specialDietlist" th:field="*{specialDiet}" class="form-control">
-	<option th:each="specialDiet: ${specialDiets}" th:value="${specialDiet.specialDietId}" th:text="${specialDiet.name}"></option>
-	</select>
-	<p>
-	<input type="submit" value="Submit" /> <input type="reset" value="Reset" />
+	<form action="#" th:action="@{/newrecipe}" th:object=${recipe}
+		method="post">
+		<table>
+			<tr>
+				<td>Name: <input type="text" th:field="${recipe.name}" /></td>
+				<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</td>
+			</tr>
+			<tr>
+				<td>Description: <input type="text"
+					th:field="${recipe.description}" /></td>
+			</tr>
+			<tr>
+				<td>Difficulty Level: <input type="text"
+					th:field="${recipe.difficultyLevel}" /></td>
+			</tr>
+			<tr>
+				<td>Ingredients: <input type="text"
+					th:field="${recipe.ingredient}" /></td>
+			</tr>
+			<tr>
+				<td><label for="categorylist">Category:</label> <select
+					id="categorylist" th:field="*{category}">
+						<option th:each="category: ${categories}"
+							th:value="${category.categoryId}" th:text="${category.name}"></option>
+				</select></td>
+			</tr>
+			<tr>
+				<td><label for="specialDietlist">Special Diet:</label> <select
+					id="specialDietlist" th:field="*{specialDiet}">
+						<option th:each="specialDiet: ${specialDiets}"
+							th:value="${specialDiet.specialDietId}"
+							th:text="${specialDiet.name}"></option>
+				</select></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="Submit" /> <input type="reset"
+					value="Reset" /></td>
+			</tr>
+		</table>
 	</form>
-    
+
 </body>
 </html>

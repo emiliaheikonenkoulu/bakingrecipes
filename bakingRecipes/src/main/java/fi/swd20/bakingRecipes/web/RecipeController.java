@@ -3,10 +3,13 @@ package fi.swd20.bakingRecipes.web;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,35 +28,35 @@ import fi.swd20.bakingRecipes.domain.SpecialDietRepository;
 @CrossOrigin
 @Controller
 public class RecipeController {
-	
+
 	@Autowired
 	RecipeRepository recipeRepository;
-	
+
 	@Autowired
 	CategoryRepository categoryRepository;
-	
+
 	@Autowired
 	SpecialDietRepository specialDietRepository;
-	
+
 	// REST palvelu, joka palauttaa kaikki kirjat
-    @RequestMapping(value="/recipes", method = RequestMethod.GET)
-    public @ResponseBody List<Recipe> getRecipesRest() {	
-        return (List<Recipe>) recipeRepository.findAll();
-    }
-    
-    // REST palvelu, joka palauttaa yhden reseptin id:n perusteella
-    @RequestMapping(value="/recipes/{id}", method = RequestMethod.GET)
-    public @ResponseBody Optional<Recipe> findRecipeRest(@PathVariable("id") Long rId) {	
-    	return recipeRepository.findById(rId);
-    }
-    
-    // REST metodi, joka lisää tietokantaan JSON:na tulleen uuden reseptin tiedot
-    @PostMapping("/recipes")
-    public @ResponseBody Recipe saveRecipeRest(@RequestBody Recipe recipe) {
- 	   recipeRepository.save(recipe);
- 	   return recipe;
-    }
-	
+	@RequestMapping(value = "/recipes", method = RequestMethod.GET)
+	public @ResponseBody List<Recipe> getRecipesRest() {
+		return (List<Recipe>) recipeRepository.findAll();
+	}
+
+	// REST palvelu, joka palauttaa yhden reseptin id:n perusteella
+	@RequestMapping(value = "/recipes/{id}", method = RequestMethod.GET)
+	public @ResponseBody Optional<Recipe> findRecipeRest(@PathVariable("id") Long rId) {
+		return recipeRepository.findById(rId);
+	}
+
+	// REST metodi, joka lisää tietokantaan JSON:na tulleen uuden reseptin tiedot
+	@PostMapping("/recipes")
+	public @ResponseBody Recipe saveRecipeRest(@RequestBody Recipe recipe) {
+		recipeRepository.save(recipe);
+		return recipe;
+	}
+
 	// reseptilistaus
 	@RequestMapping(value = "/recipelist", method = RequestMethod.GET)
 	public String getRecipes(Model model) {
@@ -61,7 +64,7 @@ public class RecipeController {
 		model.addAttribute("recipes", recipes);
 		return "recipelist";
 	}
-	
+
 	// tyhjän reseptilomakkeen muodostaminen
 	@RequestMapping(value = "/newrecipe", method = RequestMethod.GET)
 	public String getNewRecipeForm(Model model) {
@@ -70,14 +73,27 @@ public class RecipeController {
 		model.addAttribute("specialDiets", specialDietRepository.findAll());
 		return "addrecipe";
 	}
-	
+
+	// Handing input from message form
+	@RequestMapping(value = "/newrecipe", method = RequestMethod.POST)
+	public String greetingSubmit(@Valid Recipe recipe, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) { // validation errors
+			model.addAttribute("categories", categoryRepository.findAll());
+			model.addAttribute("specialDiets", specialDietRepository.findAll());
+			return "addrecipe"; // return back to form
+		} else { // no validation errors
+			recipeRepository.save(recipe);
+			return "redirect:/recipelist";
+		}
+	}
+
 	// resepti lomakkeelle syötettyjen tietojen vastaanottaminen sekä tallenus
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-		public String saveRecipe(@ModelAttribute Recipe recipe) {
+	public String saveRecipe(@ModelAttribute Recipe recipe) {
 		recipeRepository.save(recipe);
 		return "redirect:/recipelist";
 	}
-	
+
 	// reseptin poistaminen
 	@RequestMapping(value = "/deleterecipe/{id}", method = RequestMethod.GET)
 	@PreAuthorize("isAuthenticated()")
@@ -85,7 +101,7 @@ public class RecipeController {
 		recipeRepository.deleteById(recipeId);
 		return "redirect:../recipelist";
 	}
-	
+
 	// reseptin muokkaus lomake
 	@RequestMapping(value = "/editrecipe/{id}")
 	@PreAuthorize("isAuthenticated()")
@@ -94,6 +110,6 @@ public class RecipeController {
 		model.addAttribute("categories", categoryRepository.findAll());
 		model.addAttribute("specialDiets", specialDietRepository.findAll());
 		return "editrecipe";
-			}
-	
+	}
+
 }

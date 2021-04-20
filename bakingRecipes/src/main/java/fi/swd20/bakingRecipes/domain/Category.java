@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Category {
 	// attribuutit
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long categoryId;
 
 	private String name;
@@ -29,7 +29,7 @@ public class Category {
 		super();
 		this.name = name;
 	}
-	
+
 	public Category() {
 		super();
 		this.name = null;

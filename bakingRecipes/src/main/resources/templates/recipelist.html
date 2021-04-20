@@ -1,16 +1,20 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <title>Recipe List</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 	<h1>Recipes</h1>
-	<div sec:authorize="isAuthenticated()"><h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3></div>
-	<div sec:authorize="isAuthenticated()"><form th:action="@{/logout}" method="post">
-	<input type="submit" value="Sign Out"/>
-	</form>
+	<div sec:authorize="isAuthenticated()">
+		<h3 th:inline="text">Welcome
+			[[${#httpServletRequest.remoteUser}]]</h3>
+	</div>
+	<div sec:authorize="isAuthenticated()">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" />
+		</form>
 	</div>
 	<table>
 		<tr>
@@ -29,19 +33,21 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 			<td th:text="${recipe.ingredient}"></td>
 			<td th:text="${recipe.category.name}"></td>
 			<td th:text="${recipe.specialDiet.name}"></td>
-			<td sec:authorize="isAuthenticated()"><a th:href="@{/deleterecipe/{id}(id=${recipe.id})}">Delete</a></td>
-			<td sec:authorize="isAuthenticated()"><a th:href="@{/editrecipe/{id}(id=${recipe.id})}">Edit</a></td>
+			<td sec:authorize="isAuthenticated()"><a
+				th:href="@{/deleterecipe/{id}(id=${recipe.id})}">Delete</a></td>
+			<td sec:authorize="isAuthenticated()"><a
+				th:href="@{/editrecipe/{id}(id=${recipe.id})}">Edit</a></td>
 		</tr>
 	</table>
 	<div sec:authorize="isAuthenticated()">
-	<a href="/newrecipe">Add Recipe</a>
+		<a href="/newrecipe">Add Recipe</a>
 	</div>
 	<div sec:authorize="hasAuthority('ADMIN')">
-	<a href="/categorylist">Categories</a>
-	<a href="/specialdietlist">Special Diets</a>
+		<a href="/categorylist">Categories</a> <a href="/specialdietlist">Special
+			Diets</a>
 	</div>
 	<div sec:authorize="!isAuthenticated()">
-	<a href="/login">Login</a>
+		<a href="/login">Login</a>
 	</div>
 </body>
 </html>

@@ -16,12 +16,12 @@ public class SpecialDietController {
 
 	@Autowired
 	SpecialDietRepository specialDietRepository;
-	
+
 	// erikoisruokavalioiden listaus
-		@RequestMapping(value = "/specialdietlist", method = RequestMethod.GET)
-		public String getSpecialDiets(Model model) {
-			List<SpecialDiet> specialDiets =  (List<SpecialDiet>) specialDietRepository.findAll();
-			model.addAttribute("specialDiets", specialDiets);
-			return "specialdietlist";
-		}
+	@RequestMapping(value = "/specialdietlist", method = RequestMethod.GET)
+	public String getSpecialDiets(Model model) {
+		List<SpecialDiet> specialDiets = (List<SpecialDiet>) specialDietRepository.findAll();
+		model.addAttribute("specialDiets", specialDiets);
+		return "specialdietlist";
+	}
 }

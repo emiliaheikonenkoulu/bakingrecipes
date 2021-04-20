@@ -36,7 +36,7 @@ public class RecipeRepositoryTest {
 		reciperepository.save(recipe);
 		assertThat(recipe.getId()).isNotNull();
 	}
-	
+
 	@Test // testataan reseptin poistamista
 	@Rollback(false)
 	public void deleteRecipe() {
@@ -45,13 +45,13 @@ public class RecipeRepositoryTest {
 		Optional<Recipe> deleteRecipe = reciperepository.findById(Long.valueOf(9));
 		assertThat(deleteRecipe).isEmpty();
 	}
-	
+
 	@Test // testataan kaikkien reseptien hakemista
 	public void searchRecipes() {
 		List<Recipe> recipes = (List<Recipe>) reciperepository.findAll();
 		assertThat(recipes).isNotNull();
 	}
-	
+
 	@Test // testataan yhden reseptin hakemista
 	public void searchRecipe() {
 		List<Recipe> recipes = reciperepository.findByName("Lettutaikina");

@@ -7,4 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 public interface SpecialDietRepository extends CrudRepository<SpecialDiet, Long> {
 
 	List<SpecialDiet> findByName(String name);
+
 }

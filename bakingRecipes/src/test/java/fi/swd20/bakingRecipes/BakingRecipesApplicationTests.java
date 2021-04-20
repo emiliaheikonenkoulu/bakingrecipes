@@ -12,16 +12,16 @@ import fi.swd20.bakingRecipes.web.CategoryController;
 import fi.swd20.bakingRecipes.web.RecipeController;
 import fi.swd20.bakingRecipes.web.SpecialDietController;
 
-@ExtendWith(SpringExtension.class) //JUnit5
+@ExtendWith(SpringExtension.class) // JUnit5
 @SpringBootTest
 class BakingRecipesApplicationTests {
-	
+
 	@Autowired
 	private RecipeController recipecontroller;
-	
+
 	@Autowired
 	private CategoryController categorycontroller;
-	
+
 	@Autowired
 	private SpecialDietController specialdietcontroller;
 
@@ -29,12 +29,12 @@ class BakingRecipesApplicationTests {
 	void contextLoads() {
 		assertThat(recipecontroller).isNotNull();
 	}
-	
+
 	@Test
 	void contextLoad() {
 		assertThat(categorycontroller).isNotNull();
 	}
-	
+
 	@Test
 	void contextLoading() {
 		assertThat(specialdietcontroller).isNotNull();

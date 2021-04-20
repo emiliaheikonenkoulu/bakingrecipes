@@ -18,10 +18,10 @@ import fi.swd20.bakingRecipes.domain.SpecialDietRepository;
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 public class SpecialDietRepositoryTest {
-	
+
 	@Autowired
 	private SpecialDietRepository specialdietrepository;
-	
+
 	@Test // testataan SpecialDietRepositoryn findByName() -metodin toimivuutta
 	public void finByNameShouldReturnSpecialDiet() {
 		List<SpecialDiet> specialdiets = specialdietrepository.findByName("Pähkinätön");
@@ -35,7 +35,7 @@ public class SpecialDietRepositoryTest {
 		specialdietrepository.save(specialdiet);
 		assertThat(specialdiet.getSpecialDietId()).isNotNull();
 	}
-	
+
 	@Test // testataan erityisruokavalion poistamista
 	@Rollback(false)
 	public void deleteRecipe() {
@@ -44,13 +44,13 @@ public class SpecialDietRepositoryTest {
 		Optional<SpecialDiet> deleteSpecialDiet = specialdietrepository.findById(Long.valueOf(4));
 		assertThat(deleteSpecialDiet).isEmpty();
 	}
-	
+
 	@Test // testataan kaikkien erityisruokavalioiden hakemista
 	public void searchSpecialDiets() {
 		List<SpecialDiet> specialdiets = (List<SpecialDiet>) specialdietrepository.findAll();
 		assertThat(specialdiets).isNotNull();
 	}
-	
+
 	@Test // testataan yhden erityisruokavalion hakemista
 	public void searchSpecialDiet() {
 		List<SpecialDiet> specialdiets = specialdietrepository.findByName("Liivatteeton");
