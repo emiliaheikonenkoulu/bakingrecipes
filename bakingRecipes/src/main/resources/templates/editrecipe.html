@@ -5,24 +5,48 @@
 </head>
 <body>
 	<h1>Edit Recipe</h1>
-	<form th:object="${recipe}" th:action="@{/save}" action="#"
+	<form th:object="${recipe}" th:action="@{/saveeditedrecipe}" action="#"
 		method="post">
-		<input type="hidden" th:field="${recipe.id}" /> <label for="title">Name:</label>
-		<input type="text" th:field="${recipe.name}" /> <label for="author">Description:</label>
-		<input type="text" th:field="${recipe.description}" /> <label
-			for="year">Difficulty Level:</label> <input type="text"
-			th:field="${recipe.difficultyLevel}" /> <label for="isbn">Ingredients:</label>
-		<input type="text" th:field="${recipe.ingredient}" /> <label
-			for="categorylist">Category:</label> <select id="categorylist"
-			th:field="*{category}">
-			<option th:each="category: ${categories}"
-				th:value="${category.categoryId}" th:text="${category.name}"></option>
-		</select> <label for="specialDietlist">Special Diet:</label> <select
-			id="specialDietlist" th:field="*{specialDiet}">
-			<option th:each="specialDiet: ${specialDiets}"
-				th:value="${specialDiet.specialDietId}"
-				th:text="${specialDiet.name}"></option>
-		</select> <input class="btn btn-success" type="submit" value="Save"></input>
+		<table>
+			<tr>
+				<td><input type="hidden" th:field="${recipe.id}" /></td>
+			</tr>
+			<tr>
+				<td><label for="title">Name:</label> <input type="text"
+					th:field="${recipe.name}" /></td>
+				<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</td>
+			</tr>
+			<tr>
+				<td><label for="author">Description:</label> <input type="text"
+					th:field="${recipe.description}" /></td>
+			</tr>
+			<tr>
+				<td><label for="year">Difficulty Level:</label> <input
+					type="text" th:field="${recipe.difficultyLevel}" /></td>
+			</tr>
+			<tr>
+				<td><label for="isbn">Ingredients:</label> <input type="text"
+					th:field="${recipe.ingredient}" /></td>
+			</tr>
+			<tr>
+				<td><label for="categorylist">Category:</label> <select
+					id="categorylist" th:field="*{category}">
+						<option th:each="category: ${categories}"
+							th:value="${category.categoryId}" th:text="${category.name}"></option>
+				</select></td>
+			</tr>
+			<tr>
+				<td><label for="specialDietlist">Special Diet:</label> <select
+					id="specialDietlist" th:field="*{specialDiet}">
+						<option th:each="specialDiet: ${specialDiets}"
+							th:value="${specialDiet.specialDietId}"
+							th:text="${specialDiet.name}"></option>
+				</select></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="Save"></input></td>
+			</tr>
+		</table>
 	</form>
 </body>
 </html>

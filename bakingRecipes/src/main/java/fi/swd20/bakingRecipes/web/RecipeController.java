@@ -74,25 +74,38 @@ public class RecipeController {
 		return "addrecipe";
 	}
 
-	// Handing input from message form
-	@RequestMapping(value = "/newrecipe", method = RequestMethod.POST)
-	public String greetingSubmit(@Valid Recipe recipe, BindingResult bindingResult, Model model) {
-		if (bindingResult.hasErrors()) { // validation errors
+	// resepti lomakkeelle syötettyjen tietojen käsittely ja tallennus
+	@RequestMapping(value = "/savenewrecipe", method = RequestMethod.POST)
+	public String recipeSubmit(@Valid Recipe recipe, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) { // validation virhe
 			model.addAttribute("categories", categoryRepository.findAll());
 			model.addAttribute("specialDiets", specialDietRepository.findAll());
-			return "addrecipe"; // return back to form
-		} else { // no validation errors
+			return "addrecipe"; // palaa addrecipe.html
+		} else { // ei validation virheitä
 			recipeRepository.save(recipe);
 			return "redirect:/recipelist";
 		}
 	}
+	
+	// resepti lomakkeelle syötettyjen muokattujen tietojen käsittely ja tallennus
+		@RequestMapping(value = "/saveeditedrecipe", method = RequestMethod.POST)
+		public String recipeEditSubmit(@Valid Recipe recipe, BindingResult bindingResult, Model model) {
+			if (bindingResult.hasErrors()) { // validation virhe
+				model.addAttribute("categories", categoryRepository.findAll());
+				model.addAttribute("specialDiets", specialDietRepository.findAll());
+				return "editrecipe"; // palaa editrecipe.html
+			} else { // ei validation virheitä
+				recipeRepository.save(recipe);
+				return "redirect:/recipelist";
+			}
+		}
 
-	// resepti lomakkeelle syötettyjen tietojen vastaanottaminen sekä tallenus
+	/* // resepti lomakkeelle syötettyjen tietojen vastaanottaminen sekä tallenus
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String saveRecipe(@ModelAttribute Recipe recipe) {
 		recipeRepository.save(recipe);
 		return "redirect:/recipelist";
-	}
+	} */
 
 	// reseptin poistaminen
 	@RequestMapping(value = "/deleterecipe/{id}", method = RequestMethod.GET)
