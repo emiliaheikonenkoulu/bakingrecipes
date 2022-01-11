@@ -41,7 +41,7 @@ public class CategoryRepositoryTest {
 	public void deleteCategory() {
 		Category category = categoryrepository.findById(Long.valueOf(7)).get();
 		categoryrepository.delete(category);
-		Optional<Category> deleteCategory = categoryrepository.findById(Long.valueOf(9));
+		Optional<Category> deleteCategory = categoryrepository.findById(Long.valueOf(7));
 		assertThat(deleteCategory).isEmpty();
 	}
 
